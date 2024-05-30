@@ -126,7 +126,7 @@ export default function Home() {
       </div>
     );
   return (
-    <div className="flex flex-col gap-4 bg-orange-300 min-h-screen ">
+    <div className="flex flex-col gap-4 bg-orange-300 min-h-screen font-comic ">
       <Navbar location={data?.city.name} />
       <main className="px-3 max-w-7xl mx-auto flex flex-col gap-9  w-full  pb-10 pt-4 ">
         {/* today data  */}
