@@ -8,6 +8,9 @@ import Container from "@/components/Container";
 import { tempConvertor } from "@/utils/tempConvertor";
 import WeatherIcon from "@/components/WeatherIcon";
 import { getDayOrNightIcon } from "@/utils/getDayOrNightIcon";
+import WeatherDetails from "@/components/WeatherDetails";
+import { metersToMiles } from "@/utils/metersToMiles";
+import { convertWindSpeed } from "@/utils/convertWindSpeed";
 
 interface WeatherDetail {
   dt: number;
@@ -158,9 +161,29 @@ export default function Home() {
                   </div>
             </Container>
           </div>
+          <div className="flex gap-4">
+              <Container className="w-fit justify-center flex-col px-4 items-center">
+                <p className="capitalize text-center">{firstData?.weather[0].description}</p>
+                <WeatherIcon
+                          iconName={getDayOrNightIcon(
+                            firstData?.weather[0].icon ?? "",
+                            firstData?.dt_txt ?? ""
+                          )}
+                        />
+              </Container>
+              <Container className="bg-orange-300/80 px-6 gap-4 justify-between overflow-x-auto">
+                <WeatherDetails visability={metersToMiles(firstData?.visibility ?? 10000)} airPressure={`${firstData?.main.pressure} hPa`} sunrise={format(data?.city.sunrise ?? 1702949452, "H:mm")}
+              // sunrise={}
+              sunset={format(data?.city.sunset ?? 1702517657, "H:mm")}
+              windSpeed={convertWindSpeed(firstData?.wind.speed ?? 1.64)} humidity={`${firstData?.main.humidity}%`} />
+              </Container>
+          </div>
         </section>
         {/* Data for week */}
-        <section></section>
+        <section className="flex w-full flex-col gap-4">
+
+          <p className="text-2xl">Se7en Day Forecast</p>
+        </section>
       </main>
     </div>
   );
